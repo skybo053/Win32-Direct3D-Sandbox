@@ -6,15 +6,19 @@ cbuffer ConstantBuffer
 
 struct VSOut
 {
-  float4 pos : SV_Position;
   float2 texCoord : TexCoord;
+  float4 position : SV_Position;
 };
+
 
 VSOut main(float3 pPos : Position, float2 pTexCoord : TexCoord)
 {
-  VSOut vVsOut = { float4(pPos, 1.0F), pTexCoord};
-  //vVsOut.pos = float4(pPos, 1.0F);
-  //vVsOut.texCoord = pTexCoord;
+  VSOut vsOut;
+  vsOut.position = mul(float4(pPos, 1.0F), rotation);
+  vsOut.texCoord = pTexCoord;
 
-  return vVsOut;
+  return vsOut;
+
+  //return float4(pPos, 1.0F);
+  //return mul(rotation, float4(pPos, 1.0F));
 }

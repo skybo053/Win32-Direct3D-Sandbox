@@ -15,7 +15,6 @@ public:
   Graphics(HWND pHwnd, float pWindowWidth, float pWindowHeight);
   Graphics(const Graphics& pGraphics) = delete;
   Graphics& operator=(const Graphics& pGraphics) = delete;
-  ~Graphics() = delete;
 
   void endFrame() const;
   void clearBuffer(float pR, float pG, float pB, float pA = 1.0F) const;
