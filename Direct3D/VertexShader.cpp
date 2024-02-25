@@ -16,6 +16,11 @@ void VertexShader::bind(const Graphics& pGraphics)
   //pGraphics.getDeviceContext()->VSSetConstantBuffers(0, 1, vertexShaderConstantBuffer.GetAddressOf());
 }
 
+void VertexShader::unbind(const Graphics& pGraphics)
+{
+  pGraphics.getDeviceContext()->VSSetShader(NULL, 0, 0);
+}
+
 
 void VertexShader::setConstantBuffer(ComPtr<ID3D11Buffer> pConstantBuffer)
 {

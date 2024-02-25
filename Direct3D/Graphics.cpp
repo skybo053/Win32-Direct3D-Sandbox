@@ -281,7 +281,7 @@ void Graphics::drawTestTriangle(float pXPos, float pYPos) const
 
   //********** Step 2: Set VertexBuffer **********
   ID3D11Buffer* vVertextBuffers[]    = {vVertexBuffer.Get()}; //create Array of vertex buffers because IASetVertexBuffers takes array of buffers
-  size_t        vVertexBuffersStride = sizeof(Vertex);
+  const UINT    vVertexBuffersStride = sizeof(Vertex);
   const UINT    vOffset              = 0;
 
   deviceContext->IASetVertexBuffers(0, 1, vVertextBuffers, &vVertexBuffersStride, &vOffset);

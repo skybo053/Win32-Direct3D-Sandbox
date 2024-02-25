@@ -16,6 +16,10 @@ void PixelShader::bind(const Graphics& pGraphics)
   pGraphics.getDeviceContext()->PSSetShader(pixelShader.Get(), 0, 0);
 }
 
+void PixelShader::unbind(const Graphics& pGraphics)
+{
+  pGraphics.getDeviceContext()->PSSetShader(NULL, 0, 0);
+}
 
 PixelShader::~PixelShader()
 {

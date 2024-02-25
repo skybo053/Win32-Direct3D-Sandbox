@@ -11,6 +11,7 @@ public:
   PixelShader(const Graphics& pGraphics, const wchar_t* pShaderFile);
 
   virtual void bind(const Graphics& pGraphics) override;
+  virtual void unbind(const Graphics& pGraphics) override;
 
   virtual ~PixelShader();
 

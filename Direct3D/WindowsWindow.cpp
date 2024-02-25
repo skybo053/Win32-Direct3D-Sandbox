@@ -144,14 +144,14 @@ LRESULT WINAPI WindowsWindow::handleMessage(HWND pHwnd, UINT pMsg, WPARAM pWpara
     case WM_SYSKEYDOWN:
     case WM_KEYDOWN:
     {
-      keyboard.onKeyPressed(Keyboard::KeyEvent{ Keyboard::KeyAction::KEY_PRESSED, pWparam, static_cast<bool>(pLparam & 0x40000000) });
+      keyboard.onKeyPressed(Keyboard::KeyEvent{ Keyboard::KeyAction::KEY_PRESSED, (unsigned int)pWparam, static_cast<bool>(pLparam & 0x40000000) });
 
       break;
     }
     case WM_SYSKEYUP:
     case WM_KEYUP:
     {
-      keyboard.onKeyReleased(Keyboard::KeyEvent{ Keyboard::KeyAction::KEY_RELEASED, pWparam, false});
+      keyboard.onKeyReleased(Keyboard::KeyEvent{ Keyboard::KeyAction::KEY_RELEASED, (unsigned int)pWparam, false});
 
       break;
     }

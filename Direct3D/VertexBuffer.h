@@ -9,7 +9,7 @@
 class VertexBuffer : public Bindable
 {
 public:
-  VertexBuffer(const Graphics& pGraphics, void* pData, size_t pDataByteSize, size_t pDataStride);
+  VertexBuffer(const Graphics& pGraphics, void* pData, size_t pDataByteSize, UINT pDataStride);
   virtual ~VertexBuffer() override;
 
   virtual void bind(const Graphics& pGraphics) override;
@@ -17,7 +17,7 @@ public:
 private:
   ComPtr<ID3D11Buffer> vertexBufferPointer;
   size_t dataByteSize;
-  size_t dataByteStride;
+  UINT dataByteStride;
 };
 
 

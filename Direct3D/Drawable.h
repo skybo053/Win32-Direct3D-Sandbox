@@ -13,6 +13,7 @@ class Drawable
 public:
 
   void bind(const Graphics& pGraphics) const;
+  void unbind(const Graphics& pGraphics) const;
   void addBind(std::unique_ptr<Bindable>& pBindable);
 
   virtual void update(const Graphics& pGraphics) = 0;

@@ -1,9 +1,14 @@
-Texture2D tex2D;
+Texture2D tex;
 SamplerState samplerState;
 
-
-float4 main(float2 pTexCoord : TexCoord) : SV_Target
+struct Out
 {
-  //return tex2D.Sample(samplerState, pTexCoord);
-  return float4(1.0F, 0.0F, 0.0F, 1.0);
+  float2 texCoord : TexCoord;
+  float4 position : SV_Position;
+};
+
+float4 main(Out pOut) : SV_Target
+{
+  return tex.Sample(samplerState, pOut.texCoord);
+  //return float4(1.0F, 0.0F, 0.0F, 1.0);
 }

@@ -1,0 +1,7 @@
+Debug/*
+x64/*
+Direct3D/Debug/*
+Direct3D/Release/*
+Direct3D/x64/*
+Direct3D/Direct3D.aps
+.vs/

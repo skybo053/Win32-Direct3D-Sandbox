@@ -4,21 +4,22 @@ cbuffer ConstantBuffer
   matrix rotation;
 };
 
-struct VSOut
+
+struct Out
 {
   float2 texCoord : TexCoord;
   float4 position : SV_Position;
 };
 
 
-VSOut main(float3 pPos : Position, float2 pTexCoord : TexCoord)
+Out main(float3 pPos : Position, float2 pTexCoord : TexCoord)
 {
-  VSOut vsOut;
-  vsOut.position = mul(float4(pPos, 1.0F), rotation);
-  vsOut.texCoord = pTexCoord;
+  Out o;
+  o.texCoord = pTexCoord;
+  o.position = mul(float4(pPos, 1.0F), rotation);
 
-  return vsOut;
 
-  //return float4(pPos, 1.0F);
-  //return mul(rotation, float4(pPos, 1.0F));
+  return o;
+
+  //return mul(float4(pPos, 1.0F), rotation);
 }

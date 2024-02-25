@@ -9,6 +9,14 @@ void Drawable::bind(const Graphics& pGraphics) const
   }
 }
 
+void Drawable::unbind(const Graphics& pGraphics) const
+{
+  for(const std::unique_ptr<Bindable>& vBindable : bindables)
+  {
+    vBindable->unbind(pGraphics);
+  }
+}
+
 
 void Drawable::addBind(std::unique_ptr<Bindable>& pBindable)
 {

@@ -1,7 +1,7 @@
 #include "VertexBuffer.h"
 
 
-VertexBuffer::VertexBuffer(const Graphics& pGraphics, void* pData, size_t pDataByteSize, size_t pDataStride) : dataByteSize(pDataByteSize), dataByteStride(pDataStride)
+VertexBuffer::VertexBuffer(const Graphics& pGraphics, void* pData, size_t pDataByteSize, UINT pDataStride) : dataByteSize(pDataByteSize), dataByteStride(pDataStride)
 {
   D3D11_BUFFER_DESC      vVertexBufferDescriptor      = {};
   D3D11_SUBRESOURCE_DATA vVertexBufferSubResourceData = {};
