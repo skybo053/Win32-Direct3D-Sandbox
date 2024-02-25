@@ -1,7 +1,9 @@
 
 cbuffer ConstantBuffer
 {
-  matrix rotation;
+  matrix model;
+  matrix view;
+  matrix projection;
 };
 
 
@@ -16,7 +18,11 @@ Out main(float3 pPos : Position, float2 pTexCoord : TexCoord)
 {
   Out o;
   o.texCoord = pTexCoord;
-  o.position = mul(float4(pPos, 1.0F), rotation);
+  
+  matrix m1 = mul(model, view);
+  matrix m2 = mul(m1, projection);
+  
+  o.position = mul(float4(pPos, 1.0F), m2);
 
 
   return o;

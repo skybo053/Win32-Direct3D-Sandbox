@@ -20,12 +20,18 @@ private:
   size_t dataByteSize;
   size_t dataByteStride;
   int    numIndices;
-  DirectX::XMMATRIX    rotation;
   ComPtr<ID3D11Buffer> constantBuffer;
   float scaleFactor;
   float deltaY;
   float angleY;
   DirectX::XMVECTOR translation;
+
+  struct C_BUFFER_DATA
+  {
+    DirectX::XMMATRIX model;
+    DirectX::XMMATRIX view;
+    DirectX::XMMATRIX projection;
+  } constantBufferData;
 };
 
 

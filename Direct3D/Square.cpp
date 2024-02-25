@@ -163,14 +163,16 @@ void Square::createConstantBuffer(const Graphics& pGraphics)
   D3D11_BUFFER_DESC      vConstantBufferDesc = {};
   D3D11_SUBRESOURCE_DATA vConstantBufferSubData = {};
 
-  rotation = DirectX::XMMatrixIdentity();
+  constantBufferData.model      = DirectX::XMMatrixIdentity();
+  constantBufferData.view       = DirectX::XMMatrixIdentity();
+  constantBufferData.projection = DirectX::XMMatrixIdentity();
 
-  vConstantBufferDesc.ByteWidth = sizeof(rotation);
+  vConstantBufferDesc.ByteWidth = sizeof(constantBufferData);
   vConstantBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
   vConstantBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
   vConstantBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 
-  vConstantBufferSubData.pSysMem = &rotation;
+  vConstantBufferSubData.pSysMem = &constantBufferData;
 
   pGraphics.getDevice()->CreateBuffer(&vConstantBufferDesc, &vConstantBufferSubData, &constantBuffer);
   //pGraphics.getDeviceContext()->VSSetConstantBuffers(0, 1, constantBuffer.GetAddressOf());
@@ -184,14 +186,19 @@ void Square::update(const Graphics& pGraphics)
 
   pGraphics.getDeviceContext()->Map(constantBuffer.Get(), 0, D3D11_MAP::D3D11_MAP_WRITE_DISCARD, 0, &vMsr);
 
-  rotation = DirectX::XMMatrixTranspose(
-    DirectX::XMMatrixScaling(scaleFactor, scaleFactor, scaleFactor) *
-    DirectX::XMMatrixRotationY(angleY) *
-    DirectX::XMMatrixTranslationFromVector(translation) *
-    DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(60.0F), 640.0F / 480.0F, 1.0F, 10.0F) 
-    );
+  constantBufferData.model = 
+    DirectX::XMMatrixTranspose(
+      DirectX::XMMatrixScaling(scaleFactor, scaleFactor, scaleFactor) *
+      DirectX::XMMatrixRotationY(angleY) *
+      DirectX::XMMatrixTranslationFromVector(translation));
+
+  constantBufferData.view = DirectX::XMMatrixIdentity();
+
+  constantBufferData.projection = 
+    DirectX::XMMatrixTranspose(
+      DirectX::XMMatrixPerspectiveFovLH(DirectX::XMConvertToRadians(60.0F), 640.0F / 480.0F, 1.0F, 10.0F));
  
-  memcpy(vMsr.pData, &rotation, sizeof(rotation));
+  memcpy(vMsr.pData, &constantBufferData, sizeof(constantBufferData));
 
   pGraphics.getDeviceContext()->Unmap(constantBuffer.Get(), 0);
 }
